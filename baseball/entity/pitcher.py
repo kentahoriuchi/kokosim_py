@@ -18,7 +18,7 @@ class Pitcher:
         return '\n'.join(info)
 
     # オブジェクト内にBuilderを持たせる
-    class ButterBuilder:
+    class PitcherBuilder:
         def __init__(self):
             self.builder_name = "no name"
             self.builder_speed = 0
