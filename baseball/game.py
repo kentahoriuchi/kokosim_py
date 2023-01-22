@@ -1,7 +1,6 @@
-from runner import update
 import entity.batter
-import enums.batter_result
-import random
+import entity.pitcher
+import batter_box
 
 
 class Game:
@@ -44,24 +43,15 @@ class Game:
         print("%d回%s 開始" % (self.inning, attack_side_string))
         # イニング中のプレー処理
         while self.out_count != 3:
-            self.batter_box_result()
+            # 仮で選手の作製
+            batter = entity.batter.Butter.ButterBuilder().name("打者1").power(50).defence(30).build()
+            pitcher = entity.pitcher.Pitcher.PitcherBuilder().name("投手1").control(100).build()
+            defence_player_list = [batter] * 9
+
+            box = batter_box.BatterBox(batter, pitcher, defence_player_list, self.runner, self.out_count)
+            self.out_count, self.runner, score = box.get_result()
+            self.score += score
         print(self.score)
-
-
-    # 打席結果の処理
-    def batter_box_result(self):
-        batter_result_enum = enums.batter_result.BatterResult
-        if random.random() > 0.95:
-            action = batter_result_enum.homerun
-        elif random.random() > 0.7:
-            action = batter_result_enum.single
-        else:
-            action = batter_result_enum.out
-        print(action)
-        out, runner, score = update(self.out_count, self.runner, action)
-        self.out_count = out
-        self.runner = runner
-        self.score += score
 
     def start_game(self):
         print("start game")
