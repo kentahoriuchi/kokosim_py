@@ -1,5 +1,6 @@
 from runner import update
 import entity.batter
+import enums.batter_result
 import random
 
 
@@ -49,12 +50,13 @@ class Game:
 
     # 打席結果の処理
     def batter_box_result(self):
+        batter_result_enum = enums.batter_result.BatterResult
         if random.random() > 0.95:
-            action = "homerun"
+            action = batter_result_enum.homerun
         elif random.random() > 0.7:
-            action = "single"
+            action = batter_result_enum.single
         else:
-            action = "out"
+            action = batter_result_enum.out
         print(action)
         out, runner, score = update(self.out_count, self.runner, action)
         self.out_count = out
