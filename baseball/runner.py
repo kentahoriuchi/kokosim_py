@@ -13,6 +13,9 @@ def update(out, runner, action):
     batter_result_enum = enums.batter_result.BatterResult
     if action == batter_result_enum.out:  # アウト
         out += 1
+    elif action == batter_result_enum.fourball:  # 四死球：ランナーを1つ進塁して1塁走者をおく
+        runner = runner << 1
+        runner = runner | 0b0001
     elif action == batter_result_enum.sacrifice:  # 犠打：ランナーを1つ進塁(左シフト)してアウトカウントを1つ増やす
         runner = runner << 1
         out += 1
