@@ -1,5 +1,5 @@
-from runner import update
-from enums.batter_result import BatterResult
+from baseball.runner import update
+from baseball.enums.batter_result import BatterResult
 import random
 from enum import Enum, auto
 
@@ -113,7 +113,7 @@ class BatterBox:
     def judge_strikeout(self, contact, speed, control, henka):
         rand = random.random()
         # 係数
-        s1 = 0.1
+        s1 = 0.01
         s2 = 0.01
         s3 = 0.01
         s4 = 0.01
@@ -122,7 +122,7 @@ class BatterBox:
     def judge_batted_ball(self, contact, power, speed, control, henka):
         rand = random.random()
         # 係数
-        s1 = 0.1
+        s1 = 0.01
         s2 = 0.01
         s3 = 0.01
         s4 = 0.01
@@ -138,7 +138,7 @@ class BatterBox:
     def judge_field(self, power, speed):
         rand = random.random()
         # 係数
-        s1 = 0.1
+        s1 = 0.01
         s2 = 0.01
         if rand < (power * s1) - (speed * s2):
             return Field.outfield
@@ -148,33 +148,33 @@ class BatterBox:
     def judge_infield_goro(self, run, infield_defence):
         rand = random.random()
         # 係数
-        s1 = 0.1
+        s1 = 0.01
         s2 = 0.01
         return rand < (run * s1) - (infield_defence * s2)
 
     def judge_outfield_fly(self, outfield_defence):
         rand = random.random()
         # 係数
-        s = 0.1
+        s = 0.01
         return rand < (outfield_defence * s)
 
     def judge_outfield_fly_hit(self, run):
         rand = random.random()
         # 係数
-        s = 0.1
+        s = 0.01
         return rand < (run * s)
 
     def judge_homerun(self, power, speed):
         rand = random.random()
         # 係数
-        s1 = 0.1
+        s1 = 0.01
         s2 = 0.01
         return rand < (power * s1) - (speed * s2)
 
     def judge_outfield_clean_hit(self, run, outfield_defence):
         rand = random.random()
         # 係数
-        s1 = 0.1
+        s1 = 0.01
         s2 = 0.01
         return rand < (run * s1) - (outfield_defence * s2)
 

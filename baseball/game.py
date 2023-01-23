@@ -1,7 +1,6 @@
 from entity.batter import Butter
 from entity.pitcher import Pitcher
 from batter_box import BatterBox
-import logging
 
 
 class Game:
