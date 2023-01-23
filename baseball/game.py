@@ -1,6 +1,7 @@
-import entity.batter
-import entity.pitcher
-import batter_box
+from entity.batter import Butter
+from entity.pitcher import Pitcher
+from batter_box import BatterBox
+import logging
 
 
 class Game:
@@ -44,11 +45,11 @@ class Game:
         # イニング中のプレー処理
         while self.out_count != 3:
             # 仮で選手の作製
-            batter = entity.batter.Butter.ButterBuilder().name("打者1").power(50).defence(30).build()
-            pitcher = entity.pitcher.Pitcher.PitcherBuilder().name("投手1").control(100).build()
+            batter = Butter.ButterBuilder().name("打者1").power(50).defence(30).build()
+            pitcher = Pitcher.PitcherBuilder().name("投手1").control(100).build()
             defence_player_list = [batter] * 9
 
-            box = batter_box.BatterBox(batter, pitcher, defence_player_list, self.runner, self.out_count)
+            box = BatterBox(batter, pitcher, defence_player_list, self.runner, self.out_count)
             self.out_count, self.runner, score = box.get_result()
             self.score += score
         print(self.score)

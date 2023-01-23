@@ -1,5 +1,5 @@
 from runner import update
-import enums.batter_result
+from enums.batter_result import BatterResult
 import random
 from enum import Enum, auto
 
@@ -54,13 +54,12 @@ class BatterBox:
         outfield_defence = outfield_defence//3
 
         # 上から順に処理を書いていく
-        batter_result_enum = enums.batter_result.BatterResult
         # 1. 四死球判定（コントロール）
         if self.judge_fourball(control):
-            return batter_result_enum.fourball
+            return BatterResult.fourball
         # 2. 三振判定（ミート、球速、コントロール、変化球）
         if self.judge_strikeout(contact, speed, control, henka):
-            return batter_result_enum.out
+            return BatterResult.out
         # 3. 当たり（ゴロ、フライ、クリーン）判定（ミート、パワー、球速、コントロール、変化球）
         batted_ball = self.judge_batted_ball(contact, power, speed, control, henka)
         # 4. 内野外野判定（パワー、球速）
@@ -69,40 +68,40 @@ class BatterBox:
         if batted_ball == BattedBall.goro:
             #  5-1-1. シングルヒット確定
             if self.judge_infield_goro(run, infield_defence):
-                return batter_result_enum.single
+                return BatterResult.single
             else:
-                return batter_result_enum.out
+                return BatterResult.out
         # 5-2. 内野フライ　エラー以外はアウト確定
         if batted_ball == BattedBall.fly and field == Field.infield:
-            return batter_result_enum.out
+            return BatterResult.out
         # 5-3. 外野フライヒット判定（外野守備）
         if batted_ball == BattedBall.fly and field == Field.outfield:
             if self.judge_outfield_fly(outfield_defence):
-                return batter_result_enum.out
+                return BatterResult.out
             # 5-3-1. ヒット種類（走力）
             else:
                 if self.judge_outfield_fly_hit(run):
-                    return batter_result_enum.double
+                    return BatterResult.double
                 else:
-                    return batter_result_enum.single
+                    return BatterResult.single
         # 5-4. 内野クリーン　シングルヒット確定
         if batted_ball == BattedBall.clean and field == Field.infield:
-            return batter_result_enum.single
+            return BatterResult.single
         # 5-5. 外野クリーン　ヒット確定
         if batted_ball == BattedBall.clean and field == Field.outfield:
             # 5-5-1. ホームラン判定（パワー、球速）
             if self.judge_homerun(power, speed):
-                return batter_result_enum.homerun
+                return BatterResult.homerun
             # 5-5-2. ヒット種類（走力、外野守備）
             if self.judge_outfield_clean_hit(run, outfield_defence):
-                return batter_result_enum.triple
+                return BatterResult.triple
             else:
-                return batter_result_enum.double
+                return BatterResult.double
 
         print(contact, power, run, speed, control, henka, infield_defence, outfield_defence)
 
         # どれにも引っかからないときはアウト
-        return enums.batter_result.BatterResult.out
+        return BatterResult.out
 
     # 打席結果判定用のメソッド群
     def judge_fourball(self, control):
