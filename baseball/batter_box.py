@@ -59,7 +59,7 @@ class BatterBox:
             return BatterResult.fourball
         # 2. 三振判定（ミート、球速、コントロール、変化球）
         if self.judge_strikeout(contact, speed, control, henka):
-            return BatterResult.out
+            return BatterResult.strikeout
         # 3. 当たり（ゴロ、フライ、クリーン）判定（ミート、パワー、球速、コントロール、変化球）
         batted_ball = self.judge_batted_ball(contact, power, speed, control, henka)
         # 4. 内野外野判定（パワー、球速）
@@ -105,29 +105,34 @@ class BatterBox:
 
     # 打席結果判定用のメソッド群
     def judge_fourball(self, control):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s = 0.01
-        return rand < (1 - (control * s))
+        sd = 500
+        max_lim = 50
+        return rand < min((sd / control), max_lim)
 
     def judge_strikeout(self, contact, speed, control, henka):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s1 = 0.01
-        s2 = 0.01
-        s3 = 0.01
-        s4 = 0.01
-        return rand > (contact * s1) - (speed * s2) - (control * s3) - (henka * s4)
+        sp1 = 0.5
+        sp2 = 0.1
+        sp3 = 0.5
+        sb = 1
+        max_lim = 80
+        return rand < min(((speed * sp1) + (control * sp2) + (henka * sp3)) - (contact * sb), max_lim)
 
     def judge_batted_ball(self, contact, power, speed, control, henka):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s1 = 0.01
-        s2 = 0.01
-        s3 = 0.01
-        s4 = 0.01
-        s5 = 0.01
-        if rand < (contact * s1) + (power * s2) - (speed * s3) - (control * s4) - (henka * s5):
+        sb1 = 0.5
+        sb2 = 0.25
+        sp1 = 0.15
+        sp2 = 0.15
+        sp3 = 0.15
+        min_lim = 10
+        max_lim = 90
+        if rand < min(max(((contact * sb1) + (power * sb2)) - ((speed * sp1) + (control * sp2) + (henka * sp3)) + 20,
+                          min_lim), max_lim):
             return BattedBall.clean
         else:
             if random.random() > 0.5:
@@ -136,47 +141,47 @@ class BatterBox:
                 return BattedBall.fly
 
     def judge_field(self, power, speed):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s1 = 0.01
-        s2 = 0.01
-        if rand < (power * s1) - (speed * s2):
+        sb = 0.6
+        sp = 0.1
+        if rand < (power * sb) - (speed * sp):
             return Field.outfield
         else:
             return Field.infield
 
     def judge_infield_goro(self, run, infield_defence):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s1 = 0.01
-        s2 = 0.01
-        return rand < (run * s1) - (infield_defence * s2)
+        sb = 1
+        sp = 1
+        return rand < (run * sb) - (infield_defence * sp)
 
     def judge_outfield_fly(self, outfield_defence):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s = 0.01
+        s = 0.9
         return rand < (outfield_defence * s)
 
     def judge_outfield_fly_hit(self, run):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s = 0.01
+        s = 0.5
         return rand < (run * s)
 
     def judge_homerun(self, power, speed):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s1 = 0.01
-        s2 = 0.01
-        return rand < (power * s1) - (speed * s2)
+        sb = 0.4
+        sp = 0.2
+        return rand < (power * sb) - (speed * sp)
 
     def judge_outfield_clean_hit(self, run, outfield_defence):
-        rand = random.random()
+        rand = random.random() * 100
         # 係数
-        s1 = 0.01
-        s2 = 0.01
-        return rand < (run * s1) - (outfield_defence * s2)
+        sb = 0.3
+        sp = 0.1
+        return rand < (run * sb) - (outfield_defence * sp)
 
     # 結果を取得する
     def get_result(self):
