@@ -9,3 +9,4 @@ class BatterResult(Enum):
     homerun = auto()
     sacrifice = auto()
     fourball = auto()
+    strikeout = auto()
