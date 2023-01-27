@@ -66,7 +66,7 @@ def test_batterbox():
     test_csv["triple"] = pd.Series(result_triple)
     test_csv["homerun"] = pd.Series(result_homerun)
 
-    test_csv.to_csv('resource/batterbox_test_result.csv', index=False)
+    test_csv.to_csv('resource/results/batterbox_test_result.csv', index=False)
 
 
 
