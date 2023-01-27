@@ -10,10 +10,13 @@ def get_score(runner):
 
 
 def update(out, runner, action):
-    if action == BatterResult.out or BatterResult.strikeout:  # アウト
+    if action == BatterResult.out or action == BatterResult.strikeout:  # アウト
         out += 1
     elif action == BatterResult.fourball:  # 四死球：ランナーを1つ進塁して1塁走者をおく
-        runner = runner << 1
+        if runner == 0b0001 or runner == 0b0011 or runner == 0b0111:
+            runner = runner << 1
+        elif runner == 0b0101:
+            runner = 0b0110
         runner = runner | 0b0001
     elif action == BatterResult.sacrifice:  # 犠打：ランナーを1つ進塁(左シフト)してアウトカウントを1つ増やす
         runner = runner << 1
