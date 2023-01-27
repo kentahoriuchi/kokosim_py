@@ -115,9 +115,9 @@ class BatterBox:
         rand = random.random() * 100
         # 係数
         sp1 = 0.5
-        sp2 = 0.1
+        sp2 = 0.2
         sp3 = 0.5
-        sb = 1
+        sb = 0.9
         max_lim = 80
         return rand < min(((speed * sp1) + (control * sp2) + (henka * sp3)) - (contact * sb), max_lim)
 
@@ -125,10 +125,10 @@ class BatterBox:
         rand = random.random() * 100
         # 係数
         sb1 = 0.5
-        sb2 = 0.25
-        sp1 = 0.15
-        sp2 = 0.15
-        sp3 = 0.15
+        sb2 = 0.3
+        sp1 = 0.2
+        sp2 = 0.2
+        sp3 = 0.2
         min_lim = 10
         max_lim = 90
         if rand < min(max(((contact * sb1) + (power * sb2)) - ((speed * sp1) + (control * sp2) + (henka * sp3)) + 20,
@@ -143,7 +143,7 @@ class BatterBox:
     def judge_field(self, power, speed):
         rand = random.random() * 100
         # 係数
-        sb = 0.6
+        sb = 0.7
         sp = 0.1
         if rand < (power * sb) - (speed * sp):
             return Field.outfield
@@ -172,7 +172,7 @@ class BatterBox:
     def judge_homerun(self, power, speed):
         rand = random.random() * 100
         # 係数
-        sb = 0.4
+        sb = 0.7
         sp = 0.2
         return rand < (power * sb) - (speed * sp)
 
