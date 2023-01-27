@@ -44,8 +44,8 @@ class Game:
         # イニング中のプレー処理
         while self.out_count != 3:
             # 仮で選手の作製
-            batter = Butter.ButterBuilder().name("打者1").power(50).defence(30).build()
-            pitcher = Pitcher.PitcherBuilder().name("投手1").control(100).build()
+            batter = Butter.ButterBuilder().name("打者1").contact(50).power(50).run(50).defence(50).build()
+            pitcher = Pitcher.PitcherBuilder().name("投手1").speed(50).control(30).henka(50).build()
             defence_player_list = [batter] * 9
 
             box = BatterBox(batter, pitcher, defence_player_list, self.runner, self.out_count)
