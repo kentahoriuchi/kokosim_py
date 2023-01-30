@@ -1,5 +1,5 @@
 # builder patternで実装してみる
-class Butter:
+class Batter:
 
     def __init__(self, builder):
         # メソッドチェインの最後のbuild()をうけて、オブジェクトに値をセットする
@@ -55,4 +55,4 @@ class Butter:
 
         # メソッドチェインの最後にbuild()をコールさせて生成したComputerオブジェクトを返す
         def build(self):
-            return Butter(self)
+            return Batter(self)

@@ -1,5 +1,5 @@
 import pytest
-from baseball.entity.batter import Butter
+from baseball.entity.batter import Batter
 from baseball.entity.pitcher import Pitcher
 from baseball.batter_box import BatterBox
 from data_aggregate_helper import DataAggregateHelper
@@ -13,7 +13,7 @@ def read_csv():
 
 
 def create_batter():
-    return Butter.ButterBuilder().name("テスト打者").contact(50).power(50).run(50).build()
+    return Batter.ButterBuilder().name("テスト打者").contact(50).power(50).run(50).build()
 
 
 def create_pitcher():
@@ -21,7 +21,7 @@ def create_pitcher():
 
 
 def create_defence():
-    return Butter.ButterBuilder().name("テスト守備").defence(50).throw(50).build()
+    return Batter.ButterBuilder().name("テスト守備").defence(50).throw(50).build()
 
 def test_read_csv():
     test_csv = read_csv()
@@ -39,11 +39,11 @@ def test_batterbox():
     result_homerun = []
     for test_id in range(len(test_csv)):
         test_data = test_csv.iloc[test_id]
-        batter = Butter.ButterBuilder().name("テスト打者").contact(test_data.contact)\
+        batter = Batter.ButterBuilder().name("テスト打者").contact(test_data.contact)\
             .power(test_data.power).run(test_data.run).build()
         pitcher = Pitcher.PitcherBuilder().name("テスト投手").speed(test_data.speed)\
             .control(test_data.control).henka(test_data.henka).build()
-        defence = Butter.ButterBuilder().name("テスト守備").defence(test_data.defence)\
+        defence = Batter.ButterBuilder().name("テスト守備").defence(test_data.defence)\
             .throw(test_data.throw).build()
         box = BatterBox(batter, pitcher, [defence] * 9, 0b0000, 0)
         data_helper = DataAggregateHelper()
