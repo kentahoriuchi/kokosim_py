@@ -12,6 +12,7 @@ def main():
         first_score, second_score = play_ground.get_score()
         print("%d vs %d" %(first_score, second_score))
     write_csv_team(first_team)
+    write_csv_team(second_team)
 
 
 if __name__ == '__main__':

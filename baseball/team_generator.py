@@ -2,7 +2,8 @@ from entity.pitcher import Pitcher
 from entity.batter import Batter
 from entity.team import Team
 from random import randint
-from scripts.create_name import create
+from scripts.create_name import create_player_name
+from scripts.create_name import create_team_name
 
 
 def normal_team_generate() -> (Team, Team):
@@ -40,11 +41,13 @@ def normal_team_generate() -> (Team, Team):
 def ramdom_team_generate() -> (Team, Team):
     first_team = Team()
     second_team = Team()
+    first_team.set_name(create_team_name())
+    second_team.set_name(create_team_name())
     player_list1 = []
     player_list2 = []
     for _ in range(9):
         batter = Batter.ButterBuilder()\
-            .name(create())\
+            .name(create_player_name())\
             .contact(randint(1, 100))\
             .power(randint(1, 100))\
             .run(randint(1, 100))\
@@ -53,7 +56,7 @@ def ramdom_team_generate() -> (Team, Team):
             .build()
         player_list1.append(batter)
     pitcher1 = Pitcher.PitcherBuilder()\
-        .name(create())\
+        .name(create_player_name())\
         .speed(randint(1, 100))\
         .control(randint(1, 100))\
         .henka(randint(1, 100))\
@@ -63,7 +66,7 @@ def ramdom_team_generate() -> (Team, Team):
     first_team.set_pitcher(pitcher1)
     for _ in range(9):
         batter = Batter.ButterBuilder() \
-            .name(create()) \
+            .name(create_player_name()) \
             .contact(randint(1, 100)) \
             .power(randint(1, 100)) \
             .run(randint(1, 100)) \
@@ -72,7 +75,7 @@ def ramdom_team_generate() -> (Team, Team):
             .build()
         player_list2.append(batter)
     pitcher2 = Pitcher.PitcherBuilder() \
-        .name(create()) \
+        .name(create_player_name()) \
         .speed(randint(1, 100)) \
         .control(randint(1, 100)) \
         .henka(randint(1, 100)) \
