@@ -188,7 +188,7 @@ class BatterBox:
         action = self.judge_result()
         print(action)
         out, runner, score = update(self.out_count, self.runner, action)
-        return out, runner, score
+        return out, runner, score, action
 
 
 class BattedBall(Enum):
