@@ -1,4 +1,6 @@
 from batter_box import BatterBox
+from entity.batter import Batter
+from entity.pitcher import Pitcher
 from entity.team import Team
 
 
@@ -48,22 +50,24 @@ class Game:
         while True:
             # 打席の選手のセット
             if self.first_attack_flag:
-                batter = self.first_team.player_list[self.first_team_number_order]
-                pitcher = self.second_team.pitcher
+                batter: Batter = self.first_team.player_list[self.first_team_number_order]
+                pitcher: Pitcher = self.second_team.pitcher
                 defence_player_list = self.second_team.player_list
                 self.first_team_number_order += 1
                 if self.first_team_number_order == 9:
                     self.first_team_number_order = 0
             else:
-                batter = self.second_team.player_list[self.second_team_number_order]
-                pitcher = self.first_team.pitcher
+                batter: Batter = self.second_team.player_list[self.second_team_number_order]
+                pitcher: Pitcher = self.first_team.pitcher
                 defence_player_list = self.first_team.player_list
                 self.second_team_number_order += 1
                 if self.second_team_number_order == 9:
                     self.second_team_number_order = 0
 
             box = BatterBox(batter, pitcher, defence_player_list, self.runner, self.out_count)
-            self.out_count, self.runner, score = box.get_result()
+            self.out_count, self.runner, score, action = box.get_result()
+            batter.batter_stats.count(action, score)
+            pitcher.pitcher_stats.count(action, score)
             self.score += score
             if self.out_count == 3:
                 break

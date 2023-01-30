@@ -1,3 +1,6 @@
+from baseball.entity.pitcher_stats import PitcherStats
+
+
 # builder patternで実装してみる
 class Pitcher:
 
@@ -8,6 +11,7 @@ class Pitcher:
         self.stamina = builder.builder_stamina
         self.control = builder.builder_control
         self.henka = builder.builder_henka
+        self.pitcher_stats = PitcherStats()
 
     def __str__(self):
         info = (f'名前: {self.name}',

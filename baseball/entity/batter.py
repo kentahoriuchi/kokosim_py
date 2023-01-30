@@ -1,3 +1,6 @@
+from baseball.entity.batter_stats import BatterStats
+
+
 # builder patternで実装してみる
 class Batter:
 
@@ -9,6 +12,7 @@ class Batter:
         self.run = builder.builder_run
         self.defence = builder.builder_defence
         self.throw = builder.builder_throw
+        self.batter_stats = BatterStats()
 
     def __str__(self):
         info = (f'名前: {self.name}',
