@@ -45,7 +45,7 @@ def write_csv_team(team: Team):
     for i in range(1):
         pitcher: Pitcher = team.pitcher
         player_ability = {
-            "speed": pitcher.speed,
+            "speed": str(pitcher.speed//2 + 110) + "km/h",
             "control": pitcher.control,
             "henka": pitcher.henka,
             "stamina": pitcher.stamina
