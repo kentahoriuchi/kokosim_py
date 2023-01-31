@@ -80,6 +80,20 @@ class Game:
         sum_second_score = sum(self.second_score_list)
         return sum_first_score, sum_second_score
 
+    def get_win_team(self):
+        sum_first_score, sum_second_score = self.get_score()
+        if sum_first_score >= sum_second_score:
+            return self.first_team
+        else:
+            return self.second_team
+
+    def get_lose_team(self):
+        sum_first_score, sum_second_score = self.get_score()
+        if sum_first_score >= sum_second_score:
+            return self.second_team
+        else:
+            return self.first_team
+
     def start_game(self):
         # print("start game")
 
