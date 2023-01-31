@@ -129,7 +129,7 @@ class BatterBox:
         sp3 = 0.2
         min_lim = 10
         max_lim = 90
-        if rand < min(max(((contact * sb1) + (power * sb2)) - ((speed * sp1) + (control * sp2) + (henka * sp3)) + 20,
+        if rand < min(max(((contact * sb1) + (power * sb2)) - ((speed * sp1) + (control * sp2) + (henka * sp3)) + 10,
                           min_lim), max_lim):
             return BattedBall.clean
         else:
