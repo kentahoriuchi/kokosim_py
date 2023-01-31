@@ -5,7 +5,7 @@ from entity.team import Team
 
 
 class Game:
-    def __init__(self, first_team: Team, second_team: Team):
+    def __init__(self, first_team: Team, second_team: Team, is_official_game=True):
         self.inning = 1
         self.score = 0
         self.first_score = 0
@@ -20,6 +20,7 @@ class Game:
         self.second_team = second_team
         self.first_team_number_order = 0
         self.second_team_number_order = 0
+        self.is_official_game = is_official_game
 
     # イニングの開始前に行う初期化処理
     def __init_inning(self):
@@ -66,8 +67,9 @@ class Game:
 
             box = BatterBox(batter, pitcher, defence_player_list, self.runner, self.out_count)
             self.out_count, self.runner, score, action = box.get_result()
-            batter.batter_stats.count(action, score)
-            pitcher.pitcher_stats.count(action, score)
+            if self.is_official_game:
+                batter.batter_stats.count(action, score)
+                pitcher.pitcher_stats.count(action, score)
             self.score += score
             if self.out_count == 3:
                 break
