@@ -7,6 +7,7 @@ class Team:
         self.name = "デフォルトチーム"
         self.player_list = []
         self.pitcher = Pitcher
+        self.games = []
 
     def set_name(self, name):
         self.name = name
@@ -23,3 +24,6 @@ class Team:
 
     def set_pitcher(self, pitcher):
         self.pitcher = pitcher
+
+    def add_game(self, game):
+        self.games.append(game)
