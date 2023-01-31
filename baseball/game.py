@@ -45,7 +45,7 @@ class Game:
 
     def __do_inning(self):
         attack_side_string = '表' if self.first_attack_flag else '裏'
-        print("%d回%s 開始" % (self.inning, attack_side_string))
+        # print("%d回%s 開始" % (self.inning, attack_side_string))
         # イニング中のプレー処理
         while True:
             # 打席の選手のセット
@@ -71,7 +71,7 @@ class Game:
             self.score += score
             if self.out_count == 3:
                 break
-        print(self.score)
+        # print(self.score)
 
     def get_score(self):
         sum_first_score = sum(self.first_score_list)
@@ -79,7 +79,7 @@ class Game:
         return sum_first_score, sum_second_score
 
     def start_game(self):
-        print("start game")
+        # print("start game")
 
         # イニング処理開始
         while self.continue_flag:
@@ -90,6 +90,6 @@ class Game:
             # イニングの初期化処理
             self.__init_inning()
 
-        print("finish game")
-        print(self.first_score_list)
-        print(self.second_score_list)
+        # print("finish game")
+        # print(self.first_score_list)
+        # print(self.second_score_list)

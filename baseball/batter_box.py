@@ -98,8 +98,6 @@ class BatterBox:
             else:
                 return BatterResult.double
 
-        print(contact, power, run, speed, control, henka, infield_defence, outfield_defence)
-
         # どれにも引っかからないときはアウト
         return BatterResult.out
 
@@ -186,7 +184,6 @@ class BatterBox:
     # 結果を取得する
     def get_result(self):
         action = self.judge_result()
-        print(action)
         out, runner, score = update(self.out_count, self.runner, action)
         return out, runner, score, action
 
