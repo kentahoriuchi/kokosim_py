@@ -33,13 +33,17 @@ class Game:
 
     # イニングの終了時に行う処理
     def __finish_inning(self):
-        # 得点板に得点記録
+        # 得点の記録
         if self.first_attack_flag:
+            self.first_score += self.score
             self.first_score_list.append(self.score)
         else:
+            self.second_score += self.score
             self.second_score_list.append(self.score)
-        # ゲームを続けるかの判定
-        if self.inning == 9 and not self.first_attack_flag:
+        # ゲームを続けるかの判定(延長戦の判定)
+        if self.inning >= 9 \
+                and ((not self.first_attack_flag and self.first_score != self.second_score)
+                     or (self.first_attack_flag and self.first_score < self.second_score)):
             return False
         else:
             return True
@@ -64,39 +68,30 @@ class Game:
                 self.second_team_number_order += 1
                 if self.second_team_number_order == 9:
                     self.second_team_number_order = 0
-
+            # 打席結果処理
             box = BatterBox(batter, pitcher, defence_player_list, self.runner, self.out_count)
             self.out_count, self.runner, score, action = box.get_result()
+            # 公式戦なら結果を記録
             if self.is_official_game:
                 batter.batter_stats.count(action, score)
                 pitcher.pitcher_stats.count(action, score)
             self.score += score
             if self.out_count == 3:
                 break
-        # print(self.score)
-
-    def get_score(self):
-        sum_first_score = sum(self.first_score_list)
-        sum_second_score = sum(self.second_score_list)
-        return sum_first_score, sum_second_score
 
     def get_win_team(self):
-        sum_first_score, sum_second_score = self.get_score()
-        if sum_first_score >= sum_second_score:
+        if self.first_score >= self.second_score:
             return self.first_team
         else:
             return self.second_team
 
     def get_lose_team(self):
-        sum_first_score, sum_second_score = self.get_score()
-        if sum_first_score >= sum_second_score:
+        if self.first_score >= self.second_score:
             return self.second_team
         else:
             return self.first_team
 
     def start_game(self):
-        # print("start game")
-
         # イニング処理開始
         while self.continue_flag:
             # イニング中の処理
@@ -105,7 +100,3 @@ class Game:
             self.continue_flag = self.__finish_inning()
             # イニングの初期化処理
             self.__init_inning()
-
-        # print("finish game")
-        # print(self.first_score_list)
-        # print(self.second_score_list)
