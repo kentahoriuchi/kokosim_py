@@ -112,9 +112,9 @@ class BatterBox:
     def judge_strikeout(self, contact, speed, control, henka):
         rand = random.random() * 100
         # 係数
-        sp1 = 0.5
+        sp1 = 0.45
         sp2 = 0.2
-        sp3 = 0.5
+        sp3 = 0.45
         sb = 0.9
         max_lim = 80
         return rand < min(((speed * sp1) + (control * sp2) + (henka * sp3)) - (contact * sb), max_lim)
@@ -129,7 +129,7 @@ class BatterBox:
         sp3 = 0.2
         min_lim = 10
         max_lim = 90
-        if rand < min(max(((contact * sb1) + (power * sb2)) - ((speed * sp1) + (control * sp2) + (henka * sp3)) + 10,
+        if rand < min(max(((contact * sb1) + (power * sb2)) - ((speed * sp1) + (control * sp2) + (henka * sp3)) + 25,
                           min_lim), max_lim):
             return BattedBall.clean
         else:
