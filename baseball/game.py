@@ -1,7 +1,7 @@
-from batter_box import BatterBox
-from entity.batter import Batter
-from entity.pitcher import Pitcher
-from entity.team import Team
+from baseball.batter_box import BatterBox
+from baseball.entity.batter import Batter
+from baseball.entity.pitcher import Pitcher
+from baseball.entity.team import Team
 
 
 class Game:
