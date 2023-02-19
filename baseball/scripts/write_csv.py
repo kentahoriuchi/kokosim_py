@@ -1,6 +1,5 @@
 from baseball.entity.team import Team
-from baseball.entity.batter import Batter
-from baseball.entity.pitcher import Pitcher
+from baseball.entity.player import Player
 import pandas as pd
 import os
 
@@ -12,15 +11,16 @@ def write_csv_team(team: Team):
     batter_index = []
     batter_data = []
     for i in range(9):
-        batter: Batter = team.player_list[i]
+        batter: Player = team.player_list[i]
         player_ability = {
-            "contact": batter.contact,
-            "power": batter.power,
-            "run": batter.run,
-            "defence": batter.defence,
-            "throw": batter.throw
+            "grade": str(int(batter.grade)),
+            "contact": batter.batter.contact,
+            "power": batter.batter.power,
+            "run": batter.batter.run,
+            "defence": batter.batter.defence,
+            "throw": batter.batter.throw
         }
-        batter_stats = batter.batter_stats
+        batter_stats = batter.batter.batter_stats
         player_stats = {
             "batter_box_count": batter_stats.batter_box_count,
             "average": batter_stats.average(),
@@ -43,14 +43,15 @@ def write_csv_team(team: Team):
     pitcher_index = []
     pitcher_data = []
     for i in range(1):
-        pitcher: Pitcher = team.pitcher
+        pitcher: Player = team.pitcher
         player_ability = {
-            "speed": str(pitcher.speed//2 + 110) + "km/h",
-            "control": pitcher.control,
-            "henka": pitcher.henka,
-            "stamina": pitcher.stamina
+            "grade": str(int(pitcher.grade)),
+            "speed": str(pitcher.pitcher.speed//2 + 105) + "km/h",
+            "control": pitcher.pitcher.control,
+            "henka": pitcher.pitcher.henka,
+            "stamina": pitcher.pitcher.stamina
         }
-        pitcher_stats = pitcher.pitcher_stats
+        pitcher_stats = pitcher.pitcher.pitcher_stats
         player_stats = {
             "inning": pitcher_stats.inning(),
             "era": pitcher_stats.era(),

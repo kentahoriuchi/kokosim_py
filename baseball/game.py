@@ -55,15 +55,15 @@ class Game:
         while True:
             # 打席の選手のセット
             if self.first_attack_flag:
-                batter: Batter = self.first_team.player_list[self.first_team_number_order]
-                pitcher: Pitcher = self.second_team.pitcher
+                batter: Batter = self.first_team.player_list[self.first_team_number_order].batter
+                pitcher: Pitcher = self.second_team.pitcher.pitcher
                 defence_player_list = self.second_team.player_list
                 self.first_team_number_order += 1
                 if self.first_team_number_order == 9:
                     self.first_team_number_order = 0
             else:
-                batter: Batter = self.second_team.player_list[self.second_team_number_order]
-                pitcher: Pitcher = self.first_team.pitcher
+                batter: Batter = self.second_team.player_list[self.second_team_number_order].batter
+                pitcher: Pitcher = self.first_team.pitcher.pitcher
                 defence_player_list = self.first_team.player_list
                 self.second_team_number_order += 1
                 if self.second_team_number_order == 9:

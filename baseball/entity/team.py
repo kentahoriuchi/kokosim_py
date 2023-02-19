@@ -6,7 +6,7 @@ class Team:
     def __init__(self):
         self.name = "デフォルトチーム"
         self.player_list = []
-        self.pitcher = Player
+        self.pitcher = Player()
         self.games = []
 
     def set_name(self, name: str):

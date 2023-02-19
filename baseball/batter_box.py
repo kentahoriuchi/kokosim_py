@@ -47,10 +47,10 @@ class BatterBox:
         infield_defence = 0
         outfield_defence = 0
         for player in self.defence_player_list[2:6]:
-            infield_defence += player.defence
+            infield_defence += player.batter.defence
         infield_defence = infield_defence//4
         for player in self.defence_player_list[6:]:
-            outfield_defence += player.defence
+            outfield_defence += player.batter.defence
         outfield_defence = outfield_defence//3
 
         # 上から順に処理を書いていく
