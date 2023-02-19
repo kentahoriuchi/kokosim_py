@@ -1,4 +1,4 @@
-from baseball.entity.pitcher import Pitcher
+from baseball.entity.player import Player
 
 
 class Team:
@@ -6,23 +6,23 @@ class Team:
     def __init__(self):
         self.name = "デフォルトチーム"
         self.player_list = []
-        self.pitcher = Pitcher
+        self.pitcher = Player
         self.games = []
 
-    def set_name(self, name):
+    def set_name(self, name: str):
         self.name = name
 
-    def set_players(self, player_list):
+    def set_players(self, player_list: list[Player]):
         self.player_list = player_list
         if len(player_list) > 9:
             raise ValueError("player list length must be less than 9")
 
-    def add_player(self, player):
+    def add_player(self, player: Player):
         if len(self.player_list) == 9:
             raise ValueError("cannot add player for player list over 9")
-        self.player_list.add(player)
+        self.player_list.append(player)
 
-    def set_pitcher(self, pitcher):
+    def set_pitcher(self, pitcher: Player):
         self.pitcher = pitcher
 
     def add_game(self, game):
