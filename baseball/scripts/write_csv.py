@@ -4,8 +4,8 @@ import pandas as pd
 import os
 
 
-def write_csv_team(team: Team):
-    folder_path = f'resource/' + team.name
+def write_csv_team(team: Team, folder="resource"):
+    folder_path = folder + '/' + team.name
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
     batter_index = []
@@ -38,7 +38,7 @@ def write_csv_team(team: Team):
         index=batter_index
     )
 
-    batter_df.to_csv(f'resource/%s/batter.csv' % team.name)
+    batter_df.to_csv(folder_path + '/batter.csv')
 
     pitcher_index = []
     pitcher_data = []
@@ -67,5 +67,4 @@ def write_csv_team(team: Team):
         data=pitcher_data,
         index=pitcher_index
     )
-
-    pitcher_df.to_csv(f'resource/%s/pitcher.csv' % team.name)
+    pitcher_df.to_csv(folder_path + '/pitcher.csv')
