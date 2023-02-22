@@ -1,5 +1,5 @@
-from game import Game
-from team_generator import random_team_generate
+from baseball.game import Game
+from baseball.scripts.team_generator import gauss_random_team_generate
 from random import shuffle
 
 
@@ -11,7 +11,7 @@ class Tournament:
 
     def random_team_generator(self):
         for _ in range(self.team_num):
-            team = random_team_generate()
+            team = gauss_random_team_generate()
             self.teams.append(team)
 
     def pick_two_teams(self, teams):
@@ -27,6 +27,8 @@ class Tournament:
             if len(next_team) == 1:
                 champion = next_team[0]
                 break
+            elif len(next_team) == 4:
+                best4 = next_team
             shuffle(next_team)
             teams_list = next_team
             next_team = []
@@ -36,6 +38,9 @@ class Tournament:
                         next_team.append(teams_list[0])
                     break
                 two_teams, teams_list = self.pick_two_teams(teams_list)
+                # if len(teams_list) >= 64:
+                #     game = Game(two_teams[0], two_teams[1], is_official_game=False)
+                # else:
                 game = Game(two_teams[0], two_teams[1])
                 game.start_game()
                 win_team = game.get_win_team()
@@ -43,6 +48,6 @@ class Tournament:
                 next_team.append(win_team)
 
         print(champion.name)
-        return champion
+        return champion, best4
 
 
