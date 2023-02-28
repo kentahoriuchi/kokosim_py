@@ -2,7 +2,7 @@ import random
 from baseball.enums.batter_result import BatterResult
 
 
-def get_score(runner):
+def __get_score(runner):
     run = bin(runner & 0b1111000).count('1')  # 第3ビット以上で1がたっているビット数が得点
     runner = runner & 0b111  # 第0−2ビットに残っているのがランナー
 
@@ -40,6 +40,6 @@ def update(out, runner, action):
         runner = runner << 4
         runner = runner | 0b1000
 
-    run, runner = get_score(runner)  # アクションの結果入った得点を計算
+    run, runner = __get_score(runner)  # アクションの結果入った得点を計算
 
     return out, runner, run
