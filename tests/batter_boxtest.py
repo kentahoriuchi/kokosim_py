@@ -7,6 +7,7 @@ from data_aggregate_helper import DataAggregateHelper
 import pandas as pd
 
 
+# 今はテストしていない
 def read_csv():
     test_csv = pd.read_csv('resource/batterbox_test.csv', index_col=0)
     return test_csv
