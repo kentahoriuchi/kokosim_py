@@ -30,6 +30,37 @@ class Player:
         elif self.grade == Grade.preattend:
             self.grade = Grade.first
 
+    # dataclassへの変換用メソッド
+    # 循環importを避けるためローカルスコープでimportを行う
+    def convert_to_dataclass(self):
+        from baseball.repository.player import PlayerData
+        player = PlayerData()
+        player.name = self.name
+        player.school = self.school
+        player.grade = self.grade
+        player.contact = self.batter.set_contact
+        player.power = self.batter.set_power
+        player.run = self.batter.set_run
+        player.defence = self.batter.set_defence
+        player.throw = self.batter.set_throw
+        player.batter_box_count = self.batter.batter_stats.batter_box_count
+        player.single_count = self.batter.batter_stats.single_count
+        player.double_count = self.batter.batter_stats.double_count
+        player.triple_count = self.batter.batter_stats.triple_count
+        player.homerun_count = self.batter.batter_stats.homerun_count
+        player.batter_fourball_count = self.batter.batter_stats.fourball_count
+        player.batter_strikeout_count = self.batter.batter_stats.strikeout_count
+        player.batter_runs = self.batter.batter_stats.runs
+        player.speed = self.pitcher.set_speed
+        player.stamina = self.pitcher.set_stamina
+        player.control = self.pitcher.set_control
+        player.henka = self.pitcher.set_henka
+        player.out_count = self.pitcher.pitcher_stats.out_count
+        player.pitcher_runs = self.pitcher.pitcher_stats.runs
+        player.pitcher_strikeout_count = self.pitcher.pitcher_stats.strikeout_count
+        player.pitcher_fourball_count = self.pitcher.pitcher_stats.fourball_count
+        return player
+
 
 class Grade(IntEnum):
     first = 1
