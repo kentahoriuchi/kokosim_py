@@ -4,7 +4,7 @@ from baseball.entity.pitcher import Pitcher
 from baseball.entity.team import Team
 
 
-class Game:
+class BaseballGame:
     def __init__(self, first_team: Team, second_team: Team, is_official_game=True):
         self.inning = 1
         self.score = 0

@@ -1,4 +1,4 @@
-from baseball.game import Game
+from baseball.baseball_game import BaseballGame
 from baseball.scripts.team_generator import gauss_random_team_generate
 from random import shuffle
 
@@ -39,9 +39,9 @@ class Tournament:
                     break
                 two_teams, teams_list = self.pick_two_teams(teams_list)
                 # if len(teams_list) >= 64:
-                #     game = Game(two_teams[0], two_teams[1], is_official_game=False)
+                #     game = BaseballGame(two_teams[0], two_teams[1], is_official_game=False)
                 # else:
-                game = Game(two_teams[0], two_teams[1])
+                game = BaseballGame(two_teams[0], two_teams[1])
                 game.start_game()
                 win_team = game.get_win_team()
                 win_team.add_game(game)

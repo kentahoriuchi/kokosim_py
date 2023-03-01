@@ -1,7 +1,7 @@
 import pytest
 import shutil
 import time
-from baseball.game import Game
+from baseball.baseball_game import BaseballGame
 from baseball.scripts.write_csv import write_csv_team
 from baseball.tournament import Tournament
 
@@ -18,7 +18,7 @@ def test_トーナメントを実行():
     print(str(tim) + " 秒")
     win_team, best4 = tournament.tournament()
     for i in range(len(win_team.games)):
-        win_game: Game = win_team.games[i]
+        win_game: BaseballGame = win_team.games[i]
         print(str(win_game.get_lose_team().name) + " " + "%d vs %d" % (win_game.first_score, win_game.second_score))
         print(win_game.first_score_list)
         print(win_game.second_score_list)

@@ -1,7 +1,7 @@
 import pytest
 from baseball.entity.team import Team
 from baseball.entity.player import Player, Grade
-from baseball.game import Game
+from baseball.baseball_game import BaseballGame
 
 def test_正常にチームが作成できる():
     team = Team()
@@ -42,7 +42,7 @@ def test_プレイヤーリストの長さを超えてプレイヤーを登録�
 def test_試合の登録ができる():
     test_team = Team()
     opponent_team = Team()
-    game = Game(test_team, opponent_team)
+    game = BaseballGame(test_team, opponent_team)
     test_team.add_game(game)
     assert len(test_team.games) == 1
     assert test_team.games[0] == game
