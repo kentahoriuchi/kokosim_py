@@ -1,4 +1,4 @@
-from baseball.repository.mapper_setting import Base, Engine
+from baseball.repository.mapper_setting import Base, Engine, Session
 from sqlalchemy import Column, Integer, String
 
 
@@ -63,3 +63,7 @@ class PlayerData(Base):
 
     def create_table(self):
         Base.metadata.create_all(bind=Engine)
+
+
+def get_players_by_team(team: str):
+    return Session.query(PlayerData).filter_by(school=team)
