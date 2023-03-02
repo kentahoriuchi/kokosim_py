@@ -9,10 +9,9 @@ import baseball.repository.orm as orm
 
 @pytest.fixture
 def db():
-    # 最初にdbを削除する
-    for file in glob.glob('*.db'):
-        os.remove(file)
+    # テーブル内初期化
     player = PlayerData()
+    orm.delete_all(PlayerData)
     player.create_table()
 
 def test_正しくプレイヤーが登録できる(db):
@@ -24,7 +23,7 @@ def test_正しくプレイヤーが登録できる(db):
     player_data = player.convert_to_dataclass()
     target_id = 1
     player_data.id = target_id
-    player_data.insert()
+    orm.insert(player_data)
 
     actual_player: PlayerData = orm.read(PlayerData, target_id)
     assert actual_player.name == expected_name
@@ -39,7 +38,7 @@ def test_正しくプレイヤー情報が更新できる(db):
     player_data = player.convert_to_dataclass()
     target_id = 1
     player_data.id = target_id
-    player_data.insert()
+    orm.insert(player_data)
 
     update_name = "updated"
     player_data.name = update_name
@@ -56,7 +55,7 @@ def test_正しくプレイヤーを削除できる(db):
     player_data = player.convert_to_dataclass()
     target_id = 1
     player_data.id = target_id
-    player_data.insert()
+    orm.insert(player_data)
 
     orm.delete(PlayerData, target_id)
     with pytest.raises(NoResultFound) as e:
@@ -69,7 +68,7 @@ def test_正しくプレイヤーを削除できる(db):
     player_data = player.convert_to_dataclass()
     target_id = 1
     player_data.id = target_id
-    player_data.insert()
+    orm.insert(player_data)
 
     orm.delete(PlayerData, target_id)
     with pytest.raises(NoResultFound) as e:
