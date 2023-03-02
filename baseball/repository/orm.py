@@ -23,5 +23,11 @@ def delete(model, target_id: int):
     Session.commit()
 
 
+def delete_all(model):
+    Session.query(model).delete()
+    Session.commit()
+
+
 def read(model, target_id: int):
-    return Session.query(model).filter_by(id=target_id).one()
+    result = Session.query(model).filter_by(id=target_id).one()
+    return result
