@@ -1,3 +1,4 @@
 /tests/resource/results/
 /tests/outputs/
 *.db
+*.txt
