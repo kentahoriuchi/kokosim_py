@@ -1,12 +1,15 @@
+from game import Game
+
+
 def main():
+    game = Game()
     # ゲームの起動時処理
-    start()
+    game.start()
     # ゲーム中処理
-    do()
+    game.do()
     # ゲーム終了時処理
-    finish()
+    game.finish()
 
 
 if __name__ == '__main__':
     main()
-
