@@ -55,9 +55,9 @@ def write_csv_team(team: Team, folder="resource"):
         player_stats = {
             "inning": pitcher_stats.inning(),
             "era": pitcher_stats.era(),
-            "strikeout": pitcher_stats.strikeout,
+            "strikeout": pitcher_stats.strikeout_count,
             "runs": pitcher_stats.runs,
-            "fourball": pitcher_stats.fourball
+            "fourball": pitcher_stats.fourball_count
         }
         player_ability.update(player_stats)
         pitcher_index.append(pitcher.name)
