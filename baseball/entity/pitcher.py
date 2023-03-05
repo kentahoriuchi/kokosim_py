@@ -11,13 +11,6 @@ class Pitcher:
         self.henka = 1
         self.pitcher_stats = PitcherStats()
 
-    def __str__(self):
-        info = (f'球速: {self.speed} '
-                f'スタミナ: {self.stamina} '
-                f'コントロール: {self.control} '
-                f'変化球: {self.henka} ')
-        return '\n'.join(info)
-
     def set_speed(self, speed: int):
         if speed < 1 or speed > 100:
             raise ValueError("invalid speed value")

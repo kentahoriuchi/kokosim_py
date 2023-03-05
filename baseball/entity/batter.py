@@ -18,14 +18,6 @@ class Batter:
         self.batter_stats = BatterStats()
         self.batter_ex_point = BatterExPoint()
 
-    def __str__(self):
-        info = ( f'ミート: {self.contact} '
-                f'パワー: {self.power} '
-                f'走力: {self.run} '
-                f'守備: {self.defence} '
-                f'送球: {self.throw}')
-        return '\n'.join(info)
-
     def set_contact(self, contact: int):
         if contact < 1 or contact > 100:
             raise ValueError("invalid contact value")
