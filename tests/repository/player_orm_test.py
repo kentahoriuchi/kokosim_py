@@ -1,18 +1,21 @@
 import pytest
-import os
-import glob
 from sqlalchemy.orm.exc import NoResultFound
 from baseball.entity.player import Player
 from baseball.repository.player import PlayerData, get_players_by_team
 import baseball.repository.orm as orm
 
 
-@pytest.fixture
+@pytest.fixture(scope='module', autouse=True)
+def create_db():
+    player = PlayerData()
+    player.create_table()
+
+
+@pytest.fixture(scope='function', autouse=True)
 def db():
     # テーブル内初期化
-    player = PlayerData()
     orm.delete_all(PlayerData)
-    player.create_table()
+
 
 def test_正しくプレイヤーが登録できる(db):
     player = Player()
@@ -48,19 +51,6 @@ def test_正しくプレイヤー情報が更新できる(db):
     assert actual_player.name == update_name
     assert actual_player.contact == expected_contact
     assert actual_player.pitcher_runs == expected_pitcher_runs
-
-def test_正しくプレイヤーを削除できる(db):
-    player = Player()
-
-    player_data = player.convert_to_dataclass()
-    target_id = 1
-    player_data.id = target_id
-    orm.insert(player_data)
-
-    orm.delete(PlayerData, target_id)
-    with pytest.raises(NoResultFound) as e:
-        actual_player: PlayerData = orm.read(PlayerData, target_id)
-    assert str(e.value) == "No row was found when one was required"
 
 def test_正しくプレイヤーを削除できる(db):
     player = Player()
