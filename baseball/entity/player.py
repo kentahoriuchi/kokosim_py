@@ -1,3 +1,4 @@
+import json
 from enum import IntEnum, auto
 from baseball.entity.pitcher import Pitcher
 from baseball.entity.batter import Batter
@@ -43,6 +44,9 @@ class Player:
         player.run = self.batter.run
         player.defence = self.batter.defence
         player.throw = self.batter.throw
+        player.batting_eye = self.batter.batting_eye
+        player.c_lead = self.batter.c_lead
+        player.batter_position = json.dumps(self.batter.batter_position.position_pro)
         player.batter_box_count = self.batter.batter_stats.batter_box_count
         player.single_count = self.batter.batter_stats.single_count
         player.double_count = self.batter.batter_stats.double_count
@@ -51,6 +55,13 @@ class Player:
         player.batter_fourball_count = self.batter.batter_stats.fourball_count
         player.batter_strikeout_count = self.batter.batter_stats.strikeout_count
         player.batter_runs = self.batter.batter_stats.runs
+        player.contact_ex = self.batter.batter_ex_point.contact
+        player.power_ex = self.batter.batter_ex_point.power
+        player.run_ex = self.batter.batter_ex_point.run
+        player.defence_ex = self.batter.batter_ex_point.defence
+        player.throw_ex = self.batter.batter_ex_point.throw
+        player.batting_eye_ex = self.batter.batter_ex_point.batting_eye
+        player.c_lead_ex = self.batter.batter_ex_point.c_lead
         player.speed = self.pitcher.speed
         player.stamina = self.pitcher.stamina
         player.control = self.pitcher.control
