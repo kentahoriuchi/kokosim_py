@@ -31,11 +31,11 @@ def test_ピッチャー能力を設定できる():
         .set_school("テスト高校")
     player.pitcher \
         .set_speed(50) \
-        .set_stamina(50) \
+        .set_max_stamina(50) \
         .set_control(50) \
         .set_henka(50)
     assert player.pitcher.speed == 50
-    assert player.pitcher.stamina == 50
+    assert player.pitcher.max_stamina == 50
     assert player.pitcher.control == 50
     assert player.pitcher.henka == 50
 

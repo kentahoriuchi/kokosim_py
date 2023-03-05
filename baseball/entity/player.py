@@ -63,7 +63,7 @@ class Player:
         player.batting_eye_ex = self.batter.batter_ex_point.batting_eye
         player.c_lead_ex = self.batter.batter_ex_point.c_lead
         player.speed = self.pitcher.speed
-        player.stamina = self.pitcher.stamina
+        player.stamina = self.pitcher.max_stamina
         player.control = self.pitcher.control
         player.henka = self.pitcher.henka
         player.out_count = self.pitcher.pitcher_stats.out_count

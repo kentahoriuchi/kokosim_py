@@ -49,7 +49,7 @@ def write_csv_team(team: Team, folder="resource"):
             "speed": str(pitcher.pitcher.speed//2 + 105) + "km/h",
             "control": pitcher.pitcher.control,
             "henka": pitcher.pitcher.henka,
-            "stamina": pitcher.pitcher.stamina
+            "stamina": pitcher.pitcher.max_stamina
         }
         pitcher_stats = pitcher.pitcher.pitcher_stats
         player_stats = {

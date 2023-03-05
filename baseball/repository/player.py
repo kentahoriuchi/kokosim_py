@@ -73,7 +73,7 @@ class PlayerData(Base):
         player.batter.batter_ex_point.batting_eye = self.batting_eye_ex
         player.batter.batter_ex_point.c_lead = self.c_lead_ex
         player.pitcher.set_speed(self.speed)
-        player.pitcher.set_stamina(self.stamina)
+        player.pitcher.set_max_stamina(self.stamina)
         player.pitcher.set_control(self.control)
         player.pitcher.set_henka(self.henka)
         player.pitcher.pitcher_stats.out_count = self.out_count
