@@ -1,4 +1,6 @@
 from baseball.entity.batter_stats import BatterStats
+from baseball.entity.batter_position import BatterPosition
+from baseball.entity.batter_ex_point import BatterExPoint
 
 
 class Batter:
@@ -10,7 +12,11 @@ class Batter:
         self.run = 1
         self.defence = 1
         self.throw = 1
+        self.batting_eye = 1
+        self.c_lead = 1
+        self.batter_position = BatterPosition()
         self.batter_stats = BatterStats()
+        self.batter_ex_point = BatterExPoint()
 
     def __str__(self):
         info = ( f'ミート: {self.contact} '
@@ -49,3 +55,36 @@ class Batter:
             raise ValueError("invalid throw value")
         self.throw = throw
         return self
+
+    def set_batting_eye(self, batting_eye: int):
+        if batting_eye < 1 or batting_eye > 100:
+            raise ValueError("invalid batting_eye value")
+        self.batting_eye = batting_eye
+        return self
+
+    def set_c_lead(self, c_lead: int):
+        if c_lead < 1 or c_lead > 100:
+            raise ValueError("invalid c_lead value")
+        self.c_lead = c_lead
+        return self
+
+    def get_contact_ex(self, point: int):
+        self.contact += self.batter_ex_point.add_contact_point(point)
+
+    def get_power_ex(self, point: int):
+        self.power += self.batter_ex_point.add_power_point(point)
+
+    def get_run_ex(self, point: int):
+        self.run += self.batter_ex_point.add_run_point(point)
+
+    def get_defence_ex(self, point: int):
+        self.defence += self.batter_ex_point.add_defence_point(point)
+
+    def get_throw_ex(self, point: int):
+        self.throw += self.batter_ex_point.add_throw_point(point)
+
+    def get_batting_eye_ex(self, point: int):
+        self.batting_eye += self.batter_ex_point.add_batting_eye_point(point)
+
+    def get_c_lead_ex(self, point: int):
+        self.c_lead += self.batter_ex_point.add_c_lead_point(point)

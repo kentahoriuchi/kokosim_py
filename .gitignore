@@ -1,4 +1,6 @@
 /tests/resource/results/
 /tests/outputs/
+/env/
+/.idea/
 *.db
 *.txt
