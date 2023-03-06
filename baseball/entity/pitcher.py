@@ -52,6 +52,7 @@ class Pitcher:
         self.pitcher_ex_point.add_pitch_types_key(ball_name)
         return self
 
+    # 複数種類加算される可能性を踏まえて辞書型で経験値追加の記述を行う
     def get_ex_point(self, points: dict):
         for key in points.keys():
             if key == PitcherStatus.speed:
