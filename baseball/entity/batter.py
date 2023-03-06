@@ -1,6 +1,7 @@
 from baseball.entity.batter_stats import BatterStats
 from baseball.entity.batter_position import BatterPosition
 from baseball.entity.batter_ex_point import BatterExPoint
+from enum import IntEnum, auto
 
 
 class Batter:
@@ -60,23 +61,32 @@ class Batter:
         self.c_lead = c_lead
         return self
 
-    def get_contact_ex(self, point: int):
-        self.contact += self.batter_ex_point.add_contact_point(point)
+    # 複数種類加算される可能性を踏まえて辞書型で経験値追加の記述を行う
+    def get_ex_point(self, points: dict):
+        for key in points.keys():
+            if key == BatterStatus.contact:
+                self.contact += self.batter_ex_point.add_contact_point(points[key])
+            elif key == BatterStatus.power:
+                self.power += self.batter_ex_point.add_power_point(points[key])
+            elif key == BatterStatus.run:
+                self.run += self.batter_ex_point.add_run_point(points[key])
+            elif key == BatterStatus.defence:
+                self.defence += self.batter_ex_point.add_defence_point(points[key])
+            elif key == BatterStatus.throw:
+                self.throw += self.batter_ex_point.add_throw_point(points[key])
+            elif key == BatterStatus.batting_eye:
+                self.batting_eye += self.batter_ex_point.add_batting_eye_point(points[key])
+            elif key == BatterStatus.c_lead:
+                self.c_lead += self.batter_ex_point.add_c_lead_point(points[key])
+            else:
+                raise ValueError("invalid key in ex_point dict")
 
-    def get_power_ex(self, point: int):
-        self.power += self.batter_ex_point.add_power_point(point)
 
-    def get_run_ex(self, point: int):
-        self.run += self.batter_ex_point.add_run_point(point)
-
-    def get_defence_ex(self, point: int):
-        self.defence += self.batter_ex_point.add_defence_point(point)
-
-    def get_throw_ex(self, point: int):
-        self.throw += self.batter_ex_point.add_throw_point(point)
-
-    def get_batting_eye_ex(self, point: int):
-        self.batting_eye += self.batter_ex_point.add_batting_eye_point(point)
-
-    def get_c_lead_ex(self, point: int):
-        self.c_lead += self.batter_ex_point.add_c_lead_point(point)
+class BatterStatus(IntEnum):
+    contact = auto()
+    power = auto()
+    run = auto()
+    defence = auto()
+    throw = auto()
+    batting_eye = auto()
+    c_lead = auto()

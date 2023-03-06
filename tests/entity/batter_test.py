@@ -1,5 +1,5 @@
 import pytest
-from baseball.entity.batter import Batter
+from baseball.entity.batter import Batter, BatterStatus
 
 def test_正常にバッターを作製できる():
     batter = Batter()\
@@ -60,16 +60,14 @@ def preset_batter() -> Batter:
     return batter
 
 def test_経験値の値が増える(preset_batter):
-    preset_batter.get_contact_ex(10)
-    preset_batter.get_power_ex(10)
+    preset_batter.get_ex_point({BatterStatus.contact: 10, BatterStatus.power: 10})
     assert preset_batter.batter_ex_point.contact == 60
     assert preset_batter.batter_ex_point.power == 10
     assert preset_batter.contact == 50
 
 def test_経験値によって能力値が増える(preset_batter):
-    preset_batter.get_contact_ex(51)
-    preset_batter.get_power_ex(200)
+    preset_batter.get_ex_point({BatterStatus.contact: 51, BatterStatus.defence: 200})
     assert preset_batter.batter_ex_point.contact == 1
-    assert preset_batter.batter_ex_point.power == 0
+    assert preset_batter.batter_ex_point.defence == 0
     assert preset_batter.contact == 51
-    assert preset_batter.power == 52
+    assert preset_batter.defence == 52
