@@ -1,6 +1,7 @@
 from baseball.entity.pitcher_stats import PitcherStats
 from baseball.entity.pitch_types_list import Pitch_types_list
 from baseball.entity.pitcher_ex_point import PitcherExPoint
+from enum import IntEnum, auto
 
 
 class Pitcher:
@@ -50,3 +51,26 @@ class Pitcher:
         self.pitch_types[ball_name] = point
         self.pitcher_ex_point.add_pitch_types_key(ball_name)
         return self
+
+    def get_ex_point(self, points: dict):
+        for key in points.keys():
+            if key == PitcherStatus.speed:
+                self.speed += self.pitcher_ex_point.add_speed_point(points[key])
+            elif key == PitcherStatus.max_stamina:
+                self.max_stamina += self.pitcher_ex_point.add_max_stamina_point(points[key])
+            elif key == PitcherStatus.control:
+                self.control += self.pitcher_ex_point.add_control_point(points[key])
+            elif key == PitcherStatus.henka:
+                self.henka += self.pitcher_ex_point.add_henka_point(points[key])
+            elif key in self.pitch_types.keys():
+                self.pitch_types[key] += self.pitcher_ex_point.add_pitch_types_point(key, points[key])
+            else:
+                raise ValueError("invalid key in pitcher ex_point dict")
+
+
+class PitcherStatus(IntEnum):
+    speed = auto()
+    max_stamina = auto()
+    control = auto()
+    henka = auto()
+    pitch_types = auto()

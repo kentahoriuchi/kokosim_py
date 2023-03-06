@@ -65,9 +65,14 @@ def test_経験値の値が増える(preset_batter):
     assert preset_batter.batter_ex_point.power == 10
     assert preset_batter.contact == 50
 
-def test_経験値によって能力値が増える(preset_batter):
+def test_経験値によって能力値が上昇する(preset_batter):
     preset_batter.get_ex_point({BatterStatus.contact: 51, BatterStatus.defence: 200})
     assert preset_batter.batter_ex_point.contact == 1
     assert preset_batter.batter_ex_point.defence == 0
     assert preset_batter.contact == 51
     assert preset_batter.defence == 52
+
+def test_経験値に不正なキーが混ざっている(preset_batter):
+    with pytest.raises(ValueError) as e:
+        preset_batter.get_ex_point({BatterStatus.contact: 51, "": 200})
+    assert str(e.value) == "invalid key in batter ex_point dict"

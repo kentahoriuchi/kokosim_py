@@ -79,7 +79,7 @@ class Batter:
             elif key == BatterStatus.c_lead:
                 self.c_lead += self.batter_ex_point.add_c_lead_point(points[key])
             else:
-                raise ValueError("invalid key in ex_point dict")
+                raise ValueError("invalid key in batter ex_point dict")
 
 
 class BatterStatus(IntEnum):

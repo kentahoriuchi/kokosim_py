@@ -2,12 +2,12 @@ class PitcherExPoint:
 
     def __init__(self):
         super().__init__()
-        self.speed = 1
-        self.max_stamina = 1
-        self.now_stamina = 1
-        self.control = 1
+        self.speed = 0
+        self.max_stamina = 0
+        self.now_stamina = 0
+        self.control = 0
         self.pitch_types = {}
-        self.henka = 1
+        self.henka = 0
 
     def add_speed_point(self, point: int):
         self.speed += point
@@ -56,3 +56,12 @@ class PitcherExPoint:
 
     def add_pitch_types_key(self, ball_name: str):
         self.pitch_types[ball_name] = 0
+
+    def add_pitch_types_point(self, key: str, point: int):
+        self.pitch_types[key] += point
+        if self.pitch_types[key] >= 100:
+            up = self.pitch_types[key] // 100
+            self.pitch_types[key] = self.pitch_types[key] % 100
+            return up
+        else:
+            return 0
