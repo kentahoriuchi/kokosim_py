@@ -6,8 +6,8 @@ class PitcherExPoint:
         self.max_stamina = 0
         self.now_stamina = 0
         self.control = 0
-        self.pitch_types = {}
         self.henka = 0
+        self.pitch_types = {}
 
     def add_speed_point(self, point: int):
         self.speed += point

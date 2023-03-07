@@ -12,8 +12,8 @@ class Pitcher:
         self.max_stamina = 1
         self.now_stamina = 1
         self.control = 1
-        self.pitch_types = {}
         self.henka = 1
+        self.pitch_types = {}
         self.pitcher_stats = PitcherStats()
         self.pitcher_ex_point = PitcherExPoint()
 
