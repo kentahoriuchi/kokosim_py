@@ -67,7 +67,7 @@ class PlayerData(Base):
         player.batter.set_throw(self.throw)
         player.batter.set_batting_eye(self.batting_eye)
         player.batter.set_c_lead(self.c_lead)
-        player.batter.batter_position.position_pro = json.load(self.batter_position)
+        player.batter.batter_position.position_pro = json.loads(self.batter_position)
         player.batter.batter_stats.batter_box_count = self.batter_box_count
         player.batter.batter_stats.single_count = self.single_count
         player.batter.batter_stats.double_count = self.double_count
@@ -84,16 +84,16 @@ class PlayerData(Base):
         player.batter.batter_ex_point.batting_eye = self.batting_eye_ex
         player.batter.batter_ex_point.c_lead = self.c_lead_ex
         player.pitcher.set_speed(self.speed)
-        player.pitcher.set_max_stamina(self.stamina)
+        player.pitcher.set_max_stamina(self.max_stamina)
         player.pitcher.now_stamina = self.now_stamina
         player.pitcher.set_control(self.control)
         player.pitcher.set_henka(self.henka)
-        player.pitcher.pitch_types = json.load(self.pitch_types)
+        player.pitcher.pitch_types = json.loads(self.pitch_types)
         player.pitcher.pitcher_ex_point.speed = self.speed_ex
         player.pitcher.pitcher_ex_point.max_stamina = self.max_stamina_ex
         player.pitcher.pitcher_ex_point.control = self.control_ex
         player.pitcher.pitcher_ex_point.henka = self.henka_ex
-        player.pitcher.pitcher_ex_point.pitch_types = json.load(self.pitch_types_ex)
+        player.pitcher.pitcher_ex_point.pitch_types = json.loads(self.pitch_types_ex)
         player.pitcher.pitcher_stats.out_count = self.out_count
         player.pitcher.pitcher_stats.runs = self.pitcher_runs
         player.pitcher.pitcher_stats.strikeout_count = self.pitcher_strikeout_count

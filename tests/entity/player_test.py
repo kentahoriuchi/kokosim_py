@@ -52,3 +52,30 @@ def test_学年の更新ができる():
     assert player.grade == Grade.third
     player.update_grade()
     assert player.grade == Grade.graduated
+
+def test_DB格納用のentityに変換できる():
+    player = Player()\
+        .set_name("テスト")\
+        .set_school("テスト高校")
+    player.batter\
+        .set_contact(50)\
+        .set_power(50)
+    player.batter.batter_ex_point.throw = 10
+    player.pitcher\
+        .set_max_stamina(50)\
+        .set_control(50)
+    player.pitcher.add_pitch_types("スライダー", 50)
+    player.pitcher.pitcher_ex_point.speed = 20
+
+    player_db = player.convert_to_dataclass()
+    player_converted = player_db.convert_to_entity()
+
+    assert player.name == player_converted.name
+    assert player.school == player_converted.school
+    assert player.batter.contact == player_converted.batter.contact
+    assert player.batter.power == player_converted.batter.power
+    assert player.batter.batter_ex_point.throw == player_converted.batter.batter_ex_point.throw
+    assert player.pitcher.max_stamina == player_converted.pitcher.max_stamina
+    assert player.pitcher.control == player_converted.pitcher.control
+    assert player.pitcher.pitch_types == player_converted.pitcher.pitch_types
+    assert player.pitcher.pitcher_ex_point.speed == player_converted.pitcher.pitcher_ex_point.speed
