@@ -23,7 +23,7 @@ def normal_team_generate() -> Team:
         .set_speed(50)\
         .set_control(50)\
         .set_henka(50)\
-        .set_stamina(50)
+        .set_max_stamina(50)
     team.set_players(player_list)
     team.set_pitcher(pitcher)
     return team
@@ -51,7 +51,7 @@ def gauss_random_team_generate() -> Team:
         .set_speed(validate_spec(int(gauss(ave, sd))))\
         .set_control(validate_spec(int(gauss(ave, sd))))\
         .set_henka(validate_spec(int(gauss(ave, sd))))\
-        .set_stamina(validate_spec(int(gauss(ave, sd))))
+        .set_max_stamina(validate_spec(int(gauss(ave, sd))))
     player_list = optimize_player_list_neo(player_list)
     team.set_players(player_list)
     team.set_pitcher(pitcher)

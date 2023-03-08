@@ -1,4 +1,7 @@
 from baseball.entity.batter_stats import BatterStats
+from baseball.entity.batter_position import BatterPosition
+from baseball.entity.batter_ex_point import BatterExPoint
+from enum import IntEnum, auto
 
 
 class Batter:
@@ -10,15 +13,11 @@ class Batter:
         self.run = 1
         self.defence = 1
         self.throw = 1
+        self.batting_eye = 1
+        self.c_lead = 1
+        self.batter_position = BatterPosition()
         self.batter_stats = BatterStats()
-
-    def __str__(self):
-        info = ( f'ミート: {self.contact} '
-                f'パワー: {self.power} '
-                f'走力: {self.run} '
-                f'守備: {self.defence} '
-                f'送球: {self.throw}')
-        return '\n'.join(info)
+        self.batter_ex_point = BatterExPoint()
 
     def set_contact(self, contact: int):
         if contact < 1 or contact > 100:
@@ -49,3 +48,45 @@ class Batter:
             raise ValueError("invalid throw value")
         self.throw = throw
         return self
+
+    def set_batting_eye(self, batting_eye: int):
+        if batting_eye < 1 or batting_eye > 100:
+            raise ValueError("invalid batting_eye value")
+        self.batting_eye = batting_eye
+        return self
+
+    def set_c_lead(self, c_lead: int):
+        if c_lead < 1 or c_lead > 100:
+            raise ValueError("invalid c_lead value")
+        self.c_lead = c_lead
+        return self
+
+    # 複数種類加算される可能性を踏まえて辞書型で経験値追加の記述を行う
+    def get_ex_point(self, points: dict):
+        for key in points.keys():
+            if key == BatterStatus.contact:
+                self.contact += self.batter_ex_point.add_contact_point(points[key])
+            elif key == BatterStatus.power:
+                self.power += self.batter_ex_point.add_power_point(points[key])
+            elif key == BatterStatus.run:
+                self.run += self.batter_ex_point.add_run_point(points[key])
+            elif key == BatterStatus.defence:
+                self.defence += self.batter_ex_point.add_defence_point(points[key])
+            elif key == BatterStatus.throw:
+                self.throw += self.batter_ex_point.add_throw_point(points[key])
+            elif key == BatterStatus.batting_eye:
+                self.batting_eye += self.batter_ex_point.add_batting_eye_point(points[key])
+            elif key == BatterStatus.c_lead:
+                self.c_lead += self.batter_ex_point.add_c_lead_point(points[key])
+            else:
+                raise ValueError("invalid key in batter ex_point dict")
+
+
+class BatterStatus(IntEnum):
+    contact = auto()
+    power = auto()
+    run = auto()
+    defence = auto()
+    throw = auto()
+    batting_eye = auto()
+    c_lead = auto()
