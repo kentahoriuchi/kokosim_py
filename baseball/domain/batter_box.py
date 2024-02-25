@@ -1,4 +1,4 @@
-from baseball.runner import update
+from baseball.domain.runner import update
 from baseball.enums.batter_result import BatterResult
 import random
 from enum import Enum, auto

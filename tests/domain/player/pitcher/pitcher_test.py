@@ -1,5 +1,5 @@
 import pytest
-from baseball.entity.pitcher import Pitcher, PitcherStatus
+from baseball.domain.player.pitcher.pitcher import Pitcher, PitcherStatus
 
 def test_正常にピッチャーを作製できる():
     pitcher = Pitcher()\

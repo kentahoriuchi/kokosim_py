@@ -1,5 +1,4 @@
-import pytest
-from baseball.entity.player import Player, Grade
+from baseball.domain.player.player import Player, Grade
 
 def test_正常にプレイヤーを作製できる():
     player = Player()\

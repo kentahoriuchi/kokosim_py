@@ -1,5 +1,5 @@
 import pytest
-from baseball.runner import update
+from baseball.domain.runner import update
 from baseball.enums.batter_result import BatterResult
 
 # out, runner, action, expect_out, expect_runner, expect_run

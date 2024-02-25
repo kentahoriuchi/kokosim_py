@@ -1,4 +1,4 @@
-from baseball.baseball_game import BaseballGame
+from baseball.domain.baseball_game import BaseballGame
 from baseball.scripts.team_generator import gauss_random_team_generate
 from random import shuffle
 

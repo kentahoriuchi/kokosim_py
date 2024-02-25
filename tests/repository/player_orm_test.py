@@ -1,6 +1,6 @@
 import pytest
 from sqlalchemy.orm.exc import NoResultFound
-from baseball.entity.player import Player
+from baseball.domain.player.player import Player
 from baseball.repository.player import PlayerData, get_players_by_team
 import baseball.repository.orm as orm
 

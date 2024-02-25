@@ -1,7 +1,7 @@
 import pytest
-from baseball.entity.team import Team
-from baseball.entity.player import Player, Grade
-from baseball.baseball_game import BaseballGame
+from baseball.domain.team.team import Team
+from baseball.domain.player.player import Player, Grade
+from baseball.domain.baseball_game import BaseballGame
 
 def test_正常にチームが作成できる():
     team = Team()

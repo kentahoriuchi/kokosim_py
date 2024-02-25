@@ -1,4 +1,4 @@
-from baseball.entity.player import Player
+from baseball.domain.player.player import Player
 
 
 class Team:

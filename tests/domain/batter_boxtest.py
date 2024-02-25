@@ -1,7 +1,6 @@
-import pytest
-from baseball.entity.batter import Batter
-from baseball.entity.pitcher import Pitcher
-from baseball.batter_box import BatterBox
+from baseball.domain.player.batter.batter import Batter
+from baseball.domain.player.pitcher.pitcher import Pitcher
+from baseball.domain.batter_box import BatterBox
 from data_aggregate_helper import DataAggregateHelper
 
 import pandas as pd
@@ -9,7 +8,7 @@ import pandas as pd
 
 # 今はテストしていない
 def read_csv():
-    test_csv = pd.read_csv('resource/batterbox_test.csv', index_col=0)
+    test_csv = pd.read_csv('../resource/batterbox_test.csv', index_col=0)
     return test_csv
 
 

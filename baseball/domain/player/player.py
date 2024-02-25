@@ -1,7 +1,7 @@
 import json
 from enum import IntEnum, auto
-from baseball.entity.pitcher import Pitcher
-from baseball.entity.batter import Batter
+from baseball.domain.player.pitcher.pitcher import Pitcher
+from baseball.domain.player.batter.batter import Batter
 
 
 class Player:
