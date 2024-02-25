@@ -1,5 +1,5 @@
 import pytest
-from baseball.entity.batter import Batter, BatterStatus
+from baseball.domain.player.batter.batter import Batter, BatterStatus
 
 def test_正常にバッターを作製できる():
     batter = Batter()\

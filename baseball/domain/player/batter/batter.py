@@ -1,6 +1,6 @@
-from baseball.entity.batter_stats import BatterStats
-from baseball.entity.batter_position import BatterPosition
-from baseball.entity.batter_ex_point import BatterExPoint
+from baseball.domain.player.batter.batter_stats import BatterStats
+from baseball.domain.player.batter.batter_position import BatterPosition
+from baseball.domain.player.batter.batter_ex_point import BatterExPoint
 from enum import IntEnum, auto
 
 

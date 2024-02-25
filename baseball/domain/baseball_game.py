@@ -1,7 +1,7 @@
-from baseball.batter_box import BatterBox
-from baseball.entity.batter import Batter
-from baseball.entity.pitcher import Pitcher
-from baseball.entity.team import Team
+from baseball.domain.batter_box import BatterBox
+from baseball.domain.player.batter.batter import Batter
+from baseball.domain.player.pitcher.pitcher import Pitcher
+from baseball.domain.team.team import Team
 
 
 class BaseballGame:

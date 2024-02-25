@@ -1,6 +1,6 @@
-from baseball.entity.pitcher_stats import PitcherStats
-from baseball.entity.pitch_types_list import Pitch_types_list
-from baseball.entity.pitcher_ex_point import PitcherExPoint
+from baseball.domain.player.pitcher.pitcher_stats import PitcherStats
+from baseball.domain.player.pitcher.pitch_types_list import Pitch_types_list
+from baseball.domain.player.pitcher.pitcher_ex_point import PitcherExPoint
 from enum import IntEnum, auto
 
 
